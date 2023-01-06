@@ -23,7 +23,7 @@ class AnalysisRequest(BaseModel):
     text: str
 
 
-@app.post("/ner-per-sentence")
+@app.post("/nl/ner-per-sentence")
 def analyze(req: AnalysisRequest):
     doc = pipelines['nl'](req.text)
     entities = []
