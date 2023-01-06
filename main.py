@@ -16,7 +16,7 @@ pipelines = {}
 
 for lang, pack in zip(languages, packages):
     stanza.download(lang, package=pack, model_dir='./stanza_resources')
-    pipelines[lang] = stanza.Pipeline(lang=lang, processors='tokenize,ner')
+    pipelines[lang] = stanza.Pipeline(lang=lang, processors='tokenize,ner', download_method=2, dir='./stanza_resources')
 
 
 class AnalysisRequest(BaseModel):
@@ -36,4 +36,4 @@ def analyze(req: AnalysisRequest):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
