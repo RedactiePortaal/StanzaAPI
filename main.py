@@ -19,11 +19,13 @@ for lang, pack in zip(languages, packages):
     pipelines[lang] = stanza.Pipeline(lang=lang, processors='tokenize,ner')
 
 
+class AnalysisRequest(BaseModel):
+    text: str
 
 
-@app.post("/nl/ner-per-sentence")
-def analyze(req: str):
-    doc = pipelines['nl'](req)
+@app.post("/ner-per-sentence")
+def analyze(req: AnalysisRequest):
+    doc = pipelines['nl'](req.text)
     entities = []
     for sent in doc.sentences:
         sentEnts = []
